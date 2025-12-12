@@ -7,11 +7,7 @@ export function Footer() {
 				<div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 					<div className="col-span-1 md:col-span-1">
 						<div className="flex items-center gap-2 mb-4">
-							<div className="size-6 rounded bg-slate-900 text-white flex items-center justify-center">
-								<span className="material-symbols-outlined text-[14px]">
-									fingerprint
-								</span>
-							</div>
+							<img src="/logo.png" className="w-8 h-8" />
 							<span className="font-display font-bold text-slate-900">
 								Racoon
 							</span>
@@ -101,7 +97,7 @@ export function Footer() {
 				</div>
 				<div className="border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
 					<p className="text-xs text-slate-400">
-						© 2024 Racoon Protocol. All rights reserved.
+						© {new Date().getFullYear()} Racoon. All rights reserved.
 					</p>
 					<div className="flex gap-4">
 						<Link

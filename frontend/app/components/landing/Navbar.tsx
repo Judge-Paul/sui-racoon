@@ -5,11 +5,7 @@ export function Navbar() {
 		<nav className="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-8">
 			<div className="max-w-6xl mx-auto glass-panel rounded-2xl px-6 py-3 flex items-center justify-between">
 				<div className="flex items-center gap-2">
-					<div className="size-8 rounded-lg bg-slate-900 text-white flex items-center justify-center">
-						<span className="material-symbols-outlined text-[20px]">
-							fingerprint
-						</span>
-					</div>
+					<img src="/logo.png" className="w-8 h-8" />
 					<span className="font-display font-bold text-lg tracking-tight text-slate-900">
 						Racoon
 					</span>
