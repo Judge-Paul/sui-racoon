@@ -1,68 +1,86 @@
 @import "tailwindcss";
 
 @theme {
-	--font-sans: "Inter", "sans-serif";
-	--font-display: "Space Grotesk", "sans-serif";
+  --font-sans: "Inter", "sans-serif";
+  --font-display: "Space Grotesk", "sans-serif";
 
-	--color-slate-850: #1e293b;
-	--color-slate-950: #020617;
+  --color-slate-850: #1e293b;
+  --color-slate-950: #020617;
 
-	--color-stone-50: #fafaf9;
-	--color-stone-100: #f5f5f4;
+  --color-stone-50: #fafaf9;
+  --color-stone-100: #f5f5f4;
 
-	--color-teal-muted: #5eead4;
-	--color-teal-dark: #0f766e;
+  --color-teal-muted: #5eead4;
+  --color-teal-dark: #0f766e;
 
-	--color-amber-soft: #fcd34d;
+  --color-amber-soft: #fcd34d;
 
-	--shadow-micro: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-	--shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
-	--shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+  --shadow-micro: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
 
-	--background-image-gradient-mesh:
-		radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.05) 0px, transparent 50%),
-		radial-gradient(at 100% 100%, rgba(251, 191, 36, 0.05) 0px, transparent 50%);
+  --background-image-gradient-mesh:
+    radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(251, 191, 36, 0.05) 0px, transparent 50%);
 
-	--animate-float: float 6s ease-in-out infinite;
-	--animate-float-delayed: float 7s ease-in-out infinite 2s;
-	--animate-fade-in-up: fadeInUp 0.5s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float 7s ease-in-out infinite 2s;
+  --animate-fade-in-up: fadeInUp 0.5s ease-out forwards;
 
-	@keyframes float {
-		0% {
-			transform: translateY(0px);
-		}
-		50% {
-			transform: translateY(-10px);
-		}
-		100% {
-			transform: translateY(0px);
-		}
-	}
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
 
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(10px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 @utility glass-panel {
-	@apply bg-white/70 backdrop-blur-md border border-white/50 shadow-micro;
+  @apply shadow-micro border border-white/50 bg-white/70 backdrop-blur-md;
 }
 
 @utility glass-button {
-	@apply bg-white/40 hover:bg-white/60 backdrop-blur-sm border border-slate-200 text-slate-800 transition-all duration-300;
+  @apply border border-slate-200 bg-white/40 text-slate-800 backdrop-blur-sm transition-all duration-300 hover:bg-white/60;
 }
 
 @utility text-balance {
-	text-wrap: balance;
+  text-wrap: balance;
 }
 
 body {
-	@apply bg-stone-50 text-slate-800 font-sans antialiased selection:bg-teal-100 selection:text-teal-900;
+  @apply bg-stone-50 font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900;
+}
+
+/* Walletkit Connect Wallet Styling */
+:root {
+  --wkit-accent-hs: 210, 100%;
+  --wkit-on-accent-rgb: 255, 255, 255;
+  --wkit-bg-rgb: 239, 241, 245;
+  --wkit-on-bg-rgb: 10, 14, 34;
+  --wkit-font-family: "Inter", sans-serif;
+  --wkit-font-family-mono: "IBM Plex Mono", monospace;
+  --wkit-font-size-large: 18px;
+  --wkit-font-size-medium: 16px;
+  --wkit-font-size-small: 14px;
+  --wkit-line-height-large: 22px;
+  --wkit-line-height-medium: 20px;
+  --wkit-line-height-small: 17px;
+  --wkit-button-width: 284px;
+  --wkit-border-radius: 16px;
 }

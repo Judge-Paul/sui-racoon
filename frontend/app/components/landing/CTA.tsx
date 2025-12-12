@@ -1,3 +1,5 @@
+import { ConnectWalletButton } from "../ConnectWalletButton";
+
 export function CTA() {
   return (
     <section className="relative overflow-hidden bg-slate-900 px-4 py-24 text-center">
@@ -12,9 +14,9 @@ export function CTA() {
           academic trust on Sui.
         </p>
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
-          <button className="cursor-pointer rounded-xl bg-white px-8 py-4 font-bold text-slate-900 shadow-lg shadow-white/5 transition-colors hover:bg-slate-100">
+          <ConnectWalletButton className="cursor-pointer rounded-xl bg-white px-8 py-4 font-bold text-slate-900 shadow-lg shadow-white/5 transition-colors hover:bg-slate-100">
             Connect Wallet
-          </button>
+          </ConnectWalletButton>
           <button className="cursor-pointer rounded-xl border border-slate-700 bg-slate-800 px-8 py-4 font-medium text-white transition-colors hover:bg-slate-700">
             Issue Badges
           </button>

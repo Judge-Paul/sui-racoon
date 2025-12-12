@@ -1,3 +1,5 @@
+import { ConnectWalletButton } from "../ConnectWalletButton";
+
 export function Hero() {
   return (
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-48 md:pb-32">
@@ -26,9 +28,9 @@ export function Hero() {
           blockchain. A trustless credential layer for modern education.
         </p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <button className="w-full transform cursor-pointer rounded-xl bg-slate-900 px-8 py-3.5 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg sm:w-auto">
+          <ConnectWalletButton className="w-full transform cursor-pointer rounded-xl bg-slate-900 px-8 py-3.5 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg sm:w-auto">
             Connect Wallet
-          </button>
+          </ConnectWalletButton>
           <button className="glass-button w-full cursor-pointer rounded-xl px-8 py-3.5 font-semibold sm:w-auto">
             View Demo Profile
           </button>
