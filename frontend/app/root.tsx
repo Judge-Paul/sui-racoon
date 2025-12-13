@@ -8,6 +8,9 @@ import {
 } from "react-router";
 import { WalletProvider } from "@suiet/wallet-kit";
 import "@suiet/wallet-kit/style.css";
+import { Toaster } from "sonner";
+import { Navbar } from "~/components/landing/Navbar";
+import { Footer } from "~/components/landing/Footer";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -44,7 +47,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <WalletProvider>{children}</WalletProvider>
+        <WalletProvider>
+          <div className="min-h-screen bg-stone-50 font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </div>
+        </WalletProvider>
+        <Toaster position="top-right" richColors />
         <ScrollRestoration />
         <Scripts />
       </body>
