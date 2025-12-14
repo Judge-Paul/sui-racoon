@@ -6,13 +6,16 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-import { WalletProvider } from "@suiet/wallet-kit";
-import "@suiet/wallet-kit/style.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SuiClientProvider, WalletProvider } from "@mysten/dapp-kit";
+import { getFullnodeUrl } from "@mysten/sui/client";
 import { Toaster } from "sonner";
 import { Navbar } from "~/components/landing/Navbar";
 import { Footer } from "~/components/landing/Footer";
 
 import type { Route } from "./+types/root";
+
+import "@mysten/dapp-kit/dist/index.css";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -36,6 +39,12 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+const queryClient = new QueryClient();
+const networks = {
+  devnet: { url: getFullnodeUrl("devnet") },
+  mainnet: { url: getFullnodeUrl("mainnet") },
+};
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -47,13 +56,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <WalletProvider>
-          <div className="min-h-screen bg-stone-50 font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </div>
-        </WalletProvider>
+        <QueryClientProvider client={queryClient}>
+          <SuiClientProvider networks={networks} defaultNetwork="devnet">
+            <WalletProvider>
+              <div className="min-h-screen bg-stone-50 font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
+                <Navbar />
+                <main>{children}</main>
+                <Footer />
+              </div>
+            </WalletProvider>
+          </SuiClientProvider>
+        </QueryClientProvider>
         <Toaster position="top-right" richColors />
         <ScrollRestoration />
         <Scripts />
