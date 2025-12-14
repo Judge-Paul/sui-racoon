@@ -1,9 +1,4 @@
-import { useState } from "react";
-import { ConnectModal, useWallet } from "@suiet/wallet-kit";
-
 export function HowItWorks() {
-  const [showModal, setShowModal] = useState(false);
-  const { connected } = useWallet();
   return (
     <section className="bg-stone-50 py-24" id="verify">
       <div className="mx-auto max-w-6xl px-4">
@@ -21,9 +16,6 @@ export function HowItWorks() {
             icon="wallet"
             title="Connect Wallet"
             description="Link your Sui wallet. No email or password required."
-            onClick={() => {
-              if (!connected) setShowModal(true);
-            }}
           />
           <StepCard
             icon="badge"
@@ -42,7 +34,6 @@ export function HowItWorks() {
           />
         </div>
       </div>
-      <ConnectModal open={showModal} onOpenChange={setShowModal} />
     </section>
   );
 }

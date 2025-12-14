@@ -1,6 +1,9 @@
-import { ConnectWalletButton } from "../ConnectWalletButton";
+import { useCurrentWallet } from "@mysten/dapp-kit";
+import { ConnectWalletButton } from "~/components/ConnectWalletButton";
 
 export function Hero() {
+  const { connectionStatus } = useCurrentWallet();
+
   return (
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-48 md:pb-32">
       <div className="bg-gradient-mesh pointer-events-none absolute top-0 right-0 bottom-0 left-0 -z-10"></div>
@@ -28,9 +31,11 @@ export function Hero() {
           blockchain. A trustless credential layer for modern education.
         </p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <ConnectWalletButton className="w-full transform cursor-pointer rounded-xl bg-slate-900 px-8 py-3.5 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg sm:w-auto">
-            Connect Wallet
-          </ConnectWalletButton>
+          {connectionStatus === "disconnected" && (
+            <ConnectWalletButton className="w-full transform cursor-pointer rounded-xl bg-slate-900 px-8 py-3.5 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg sm:w-auto">
+              Connect Wallet
+            </ConnectWalletButton>
+          )}
           <button className="glass-button w-full cursor-pointer rounded-xl px-8 py-3.5 font-semibold sm:w-auto">
             View Demo Profile
           </button>
