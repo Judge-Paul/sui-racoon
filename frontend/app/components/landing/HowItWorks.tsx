@@ -1,17 +1,17 @@
 export function HowItWorks() {
   return (
-    <section className="bg-stone-50 py-24" id="verify">
+    <section className="bg-slate-950 py-24" id="verify">
       <div className="mx-auto max-w-6xl px-4">
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <h2 className="font-display mb-4 text-3xl font-bold text-slate-900">
+          <h2 className="font-display mb-4 text-3xl font-bold text-white">
             How it works
           </h2>
-          <p className="text-slate-500">
+          <p className="text-slate-400">
             Four simple steps to decentralized academic reputation.
           </p>
         </div>
         <div className="relative grid grid-cols-1 gap-8 md:grid-cols-4">
-          <div className="absolute top-12 left-0 -z-10 hidden h-px w-full bg-slate-200 md:block"></div>
+          <div className="absolute top-12 left-0 -z-10 hidden h-px w-full bg-slate-800 md:block"></div>
           <StepCard
             icon="wallet"
             title="Connect Wallet"
@@ -51,14 +51,14 @@ function StepCard({
 }) {
   return (
     <div className="group relative cursor-pointer" onClick={onClick}>
-      <div className="relative z-10 mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm transition-colors duration-300 ease-in-out group-hover:bg-slate-900">
-        <span className="material-symbols-outlined text-3xl text-slate-700 group-hover:text-slate-100">
+      <div className="relative z-10 mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl border border-slate-800 bg-slate-900 shadow-sm transition-colors duration-300 ease-in-out group-hover:border-blue-500 group-hover:bg-blue-600">
+        <span className="material-symbols-outlined text-3xl text-slate-400 group-hover:text-white">
           {icon}
         </span>
       </div>
       <div className="px-2 text-center">
-        <h3 className="mb-2 font-bold text-slate-900">{title}</h3>
-        <p className="text-sm text-slate-500">{description}</p>
+        <h3 className="mb-2 font-bold text-white">{title}</h3>
+        <p className="text-sm text-slate-400">{description}</p>
       </div>
     </div>
   );

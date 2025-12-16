@@ -59,7 +59,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <QueryClientProvider client={queryClient}>
           <SuiClientProvider networks={networks} defaultNetwork="devnet">
             <WalletProvider>
-              <div className="min-h-screen bg-stone-50 font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
+              <div className="min-h-screen bg-slate-950 font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
                 <Navbar />
                 <main>{children}</main>
                 <Footer />
