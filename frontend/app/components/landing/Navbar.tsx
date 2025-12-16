@@ -7,7 +7,7 @@ export function Navbar() {
       <div className="glass-panel mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-6 py-3">
         <Link to="/" className="flex cursor-pointer items-center gap-2">
           <img src="/logo.png" className="h-8 w-8" />
-          <span className="font-display text-lg font-bold tracking-tight text-slate-900">
+          <span className="font-display text-lg font-bold tracking-tight text-white">
             Racoon
           </span>
         </Link>
@@ -37,9 +37,9 @@ export function Navbar() {
             Docs
           </Link> */}
         </div>
-        <ConnectWalletButton className="group hidden cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-slate-100 px-4 py-2 text-sm font-semibold transition-all hover:bg-slate-200 sm:flex">
+        <ConnectWalletButton className="group hidden cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-white/10 sm:flex">
           <span>Connect Wallet</span>
-          <span className="material-symbols-outlined text-sm text-slate-400 transition-colors group-hover:text-slate-600">
+          <span className="material-symbols-outlined text-sm text-slate-400 transition-colors group-hover:text-white">
             account_balance_wallet
           </span>
         </ConnectWalletButton>

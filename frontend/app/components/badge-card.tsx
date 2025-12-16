@@ -16,8 +16,8 @@ export function BadgeCard({
   organizationImage,
 }: BadgeCardProps) {
   return (
-    <div className="group shadow-card hover:shadow-card-hover relative flex h-full cursor-pointer flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white p-5 transition-all duration-300 hover:-translate-y-1">
-      <div className="relative mb-5 flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br from-slate-50 to-slate-100 p-8">
+    <div className="group shadow-card hover:shadow-card-hover relative flex h-full cursor-pointer flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-900/50 p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-slate-900/80">
+      <div className="relative mb-5 flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl bg-slate-950 p-8">
         <div className="absolute h-32 w-32 rounded-full opacity-60 blur-2xl"></div>
         <img
           className="relative z-10 h-full w-full rounded-xl object-contain drop-shadow-xl transition-transform duration-500 group-hover:scale-110"
@@ -45,21 +45,21 @@ export function BadgeCard({
       </div>
       <div className="flex grow flex-col">
         <div className="mb-2 flex items-start justify-between">
-          <span className="text-xs font-bold tracking-wider uppercase">
+          <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
             {category}
           </span>
-          <span className="font-mono text-xs text-slate-400">{date}</span>
+          <span className="font-mono text-xs text-slate-500">{date}</span>
         </div>
-        <h3 className="font-display mb-3 text-xl leading-tight font-bold text-slate-900">
+        <h3 className="font-display mb-3 text-xl leading-tight font-bold text-white">
           {title}
         </h3>
-        <div className="mt-auto flex items-center gap-2.5 border-t border-slate-50 pt-4">
+        <div className="mt-auto flex items-center gap-2.5 border-t border-white/10 pt-4">
           <img
-            className="h-7 w-7 rounded-full border border-slate-100"
+            className="h-7 w-7 rounded-full border border-slate-800"
             alt={organizationName}
             src={organizationImage}
           />
-          <span className="truncate text-sm font-medium text-slate-600">
+          <span className="truncate text-sm font-medium text-slate-400">
             {organizationName}
           </span>
         </div>

@@ -2,6 +2,7 @@ import type { Route } from "./+types/_index";
 import { Hero } from "~/components/landing/Hero";
 import { Features } from "~/components/landing/Features";
 import { HowItWorks } from "~/components/landing/HowItWorks";
+import { EcosystemUtility } from "~/components/landing/EcosystemUtility";
 import { PlatformPreview } from "~/components/landing/PlatformPreview";
 import { CTA } from "~/components/landing/CTA";
 
@@ -22,6 +23,7 @@ export default function Home() {
       <Hero />
       <Features />
       <HowItWorks />
+      <EcosystemUtility />
       <PlatformPreview />
       <CTA />
     </>

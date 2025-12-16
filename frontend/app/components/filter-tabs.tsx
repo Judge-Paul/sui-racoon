@@ -62,11 +62,11 @@ export function FilterTabs({ tabs, activeTab, onTabChange }: FilterTabsProps) {
   return (
     <div
       ref={containerRef}
-      className="relative flex items-center gap-1 rounded-full border border-slate-200 bg-white p-1"
+      className="relative flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1"
       onMouseLeave={() => setHoveredTab(null)}
     >
       <div
-        className="absolute h-[calc(100%-8px)] rounded-full bg-slate-100 transition-all duration-300 ease-out"
+        className="absolute h-[calc(100%-8px)] rounded-full bg-white/10 transition-all duration-300 ease-out"
         style={{
           left: hoverStyle.left,
           width: hoverStyle.width,
@@ -75,7 +75,7 @@ export function FilterTabs({ tabs, activeTab, onTabChange }: FilterTabsProps) {
         }}
       />
       <div
-        className="absolute h-[calc(100%-8px)] rounded-full bg-slate-900 shadow-sm transition-all duration-300 ease-out"
+        className="absolute h-[calc(100%-8px)] rounded-full bg-blue-600 shadow-sm transition-all duration-300 ease-out"
         style={{
           left: activeStyle.left,
           width: activeStyle.width,
@@ -94,7 +94,7 @@ export function FilterTabs({ tabs, activeTab, onTabChange }: FilterTabsProps) {
             "relative z-10 h-9 cursor-pointer rounded-full px-4 text-sm font-medium transition-colors duration-200",
             activeTab === tab
               ? "text-white"
-              : "text-slate-600 hover:text-slate-900",
+              : "text-slate-400 hover:text-white",
           )}
         >
           {tab}

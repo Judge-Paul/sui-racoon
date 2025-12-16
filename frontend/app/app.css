@@ -60,11 +60,11 @@
 }
 
 @utility glass-panel {
-  @apply shadow-micro border border-white/50 bg-white/70 backdrop-blur-md;
+  @apply shadow-micro border border-white/10 bg-slate-900/70 backdrop-blur-md;
 }
 
 @utility glass-button {
-  @apply border border-slate-200 bg-white/40 text-slate-800 backdrop-blur-sm transition-all duration-300 hover:bg-white/60;
+  @apply border border-white/10 bg-white/5 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/10;
 }
 
 @utility text-balance {
@@ -72,7 +72,7 @@
 }
 
 body {
-  @apply bg-stone-50 font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900;
+  @apply bg-slate-950 font-sans text-slate-200 antialiased;
 }
 
 /* Walletkit Connect Wallet Styling */
