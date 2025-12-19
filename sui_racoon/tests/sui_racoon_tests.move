@@ -65,7 +65,7 @@ module sui_racoon::sui_racoon_tests {
 
             let mut profile = student_profile::create(
                 b"Alice",
-                b"Sui University",
+                // b"Sui University",
                 b"https://example.com/alice.jpg",
                 ctx
             );

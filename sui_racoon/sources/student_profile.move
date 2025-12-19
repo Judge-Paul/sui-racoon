@@ -7,28 +7,29 @@ module sui_racoon::student_profile {
         owner: address,
 
         name: vector<u8>,
-        university: vector<u8>,
+        // university: vector<u8>,
         profile_picture_url: vector<u8>,
 
         badges: vector<ID>,
         is_public: bool
     }
 
-    public fun create(
+    entry fun create(
         name: vector<u8>,
-        university: vector<u8>,
+        // university: vector<u8>,
         profile_picture_url: vector<u8>,
         ctx: &mut TxContext
-    ): StudentProfile {
-        StudentProfile {
+    ) {
+        let profile = StudentProfile {
             id: object::new(ctx),
             owner: tx_context::sender(ctx),
             name,
-            university,
+            // university,
             profile_picture_url,
             badges: vector::empty(),
             is_public: true
-        }
+        };
+        transfer::transfer(profile, tx_context::sender(ctx));
     }
 
     public fun add_badge(
