@@ -1,0 +1,18 @@
+
+Done! I've implemented the NFT minting functionality. Here's what was done:
+
+Move Contracts: ✅ Added mint_and_transfer() to badge.move - mints and sends badge to student ✅ Added claim_badge() to student_profile.move - links badge to profile ✅ Published to devnet - New Package ID: 0x8f268141ba5696591749703f9f80059f8870781b2b1b99c72493ae9145474b04
+
+Frontend: ✅ Created /organizer page - form to issue badges to students ✅ Updated user profile page - fetches real badges from blockchain ✅ Added "Add to Profile" button for claiming badges
+
+To test it:
+
+Go to http://localhost:5173/organizer - you'll see "Access Denied" because you need an OrganizerPass
+To mint an OrganizerPass for yourself, run this command:
+bash
+sui client call --package 0x8f268141ba5696591749703f9f80059f8870781b2b1b99c72493ae9145474b04 --module organizer_pass --function mint --args 0x9b9a85af91604ba7db64fb657ccc4a38171b0a701f796ba6a63c9ba9d5a65192 YOUR_ADDRESS --gas-budget 10000000
+(Replace YOUR_ADDRESS with your wallet address, e.g., 0x0aba84c96bb835e2482bdd5167ddece00374488e469b2fb6a24489f1be8a42e5)
+
+Once you have an OrganizerPass, refresh /organizer and you can mint badges!
+View badges at /user/YOUR_ADDRESS
+Would you like me to help you test the minting flow?
