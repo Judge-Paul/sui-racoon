@@ -1,5 +1,5 @@
 export const PACKAGE_ID =
-  "0xd02701fc853acfd16f289c6b17c70406351b1d35697f7da4250c1ec18504bc97";
+  "0x279c579d7941e9126f9279d715b2bffd90f48d7516b9aacfbbd10cc61d8bd622";
 
 // Student Profile
 export const STUDENT_PROFILE_STRUCT = `${PACKAGE_ID}::student_profile::StudentProfile`;

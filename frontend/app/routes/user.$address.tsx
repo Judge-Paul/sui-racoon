@@ -121,14 +121,23 @@ export default function UserProfile(props: Route.ComponentProps) {
         for (const obj of ownedBadges.data) {
           if (obj.data?.content?.dataType === "moveObject") {
             const fields = obj.data.content.fields as any;
+            const safeDecode = (field: any) => {
+              if (!field) return "";
+              return typeof field === "string" ? field : decodeBytes(field);
+            };
+
             badgeDataList.push({
               objectId: obj.data.objectId,
-              title: decodeBytes(fields.title),
-              description: decodeBytes(fields.description),
-              category: decodeBytes(fields.category),
+              title: safeDecode(fields.title),
+              description: safeDecode(fields.description),
+              category: safeDecode(fields.category),
               issuer: fields.issuer,
-              issuedAt: parseInt(fields.issued_at),
-              evidenceUrl: decodeBytes(fields.evidence_url),
+              issuedAt: Number(
+                fields.issued_at || fields.issuedAt || Date.now(),
+              ),
+              evidenceUrl: safeDecode(
+                fields.evidence_url || fields.evidenceUrl,
+              ),
             });
           }
         }
@@ -148,7 +157,6 @@ export default function UserProfile(props: Route.ComponentProps) {
           }
         }
       } catch (err) {
-        console.error("Fetch error:", err);
         setError(true);
       } finally {
         setLoading(false);
@@ -395,10 +403,10 @@ export default function UserProfile(props: Route.ComponentProps) {
       <section className="flex w-full flex-col gap-8">
         <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-center">
           <h2 className="font-display text-2xl font-bold text-white">
-            {isOwnProfile ? "Your Badges" : "User's Credentials"}
+            {isOwnProfile ? "Your Badges" : "User's Badges"}
           </h2>
           <FilterTabs
-            tabs={["All Badges", "Most Recent", "Claimed"]}
+            tabs={["All Badges", "Most Recent"]}
             activeTab={activeTab}
             onTabChange={setActiveTab}
           />
@@ -428,7 +436,7 @@ export default function UserProfile(props: Route.ComponentProps) {
                 activeTab === "Most Recent" ? b.issuedAt - a.issuedAt : 0,
               )
               .map((badge) => (
-                <div key={badge.objectId} className="relative">
+                <div key={badge.objectId} className="group relative">
                   <BadgeCard
                     title={badge.title}
                     image={
@@ -437,28 +445,37 @@ export default function UserProfile(props: Route.ComponentProps) {
                     }
                     category={badge.category}
                     date={formatDate(badge.issuedAt)}
-                    organizationName={`${badge.issuer.slice(0, 6)}...`}
+                    organizationName={`${badge.issuer}`}
                     organizationImage={`https://api.dicebear.com/7.x/identicon/svg?seed=${badge.issuer}`}
+                    description={badge.description}
+                    objectId={badge.objectId}
+                    issuerAddress={badge.issuer}
                   />
-                  {isOwnProfile &&
+                  {/* {isOwnProfile &&
                     !profile?.badges.includes(badge.objectId) && (
-                      <button
-                        onClick={() => handleClaimBadge(badge.objectId)}
-                        disabled={claimingBadge === badge.objectId}
-                        className="absolute right-4 bottom-4 left-4 flex h-10 items-center justify-center gap-2 rounded-xl bg-blue-500 text-sm font-semibold text-white transition-all hover:bg-blue-400 disabled:opacity-50"
-                      >
-                        {claimingBadge === badge.objectId ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                          "Add to Profile"
-                        )}
-                      </button>
-                    )}
-                  {profile?.badges.includes(badge.objectId) && (
-                    <div className="absolute top-4 right-4 flex h-8 items-center gap-1 rounded-full bg-emerald-500/20 px-3 text-xs font-semibold text-emerald-400">
-                      <Check size={14} /> Claimed
+                      <div className="absolute inset-x-0 bottom-0 translate-y-2 p-4 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                        <button
+                          onClick={() => handleClaimBadge(badge.objectId)}
+                          disabled={claimingBadge === badge.objectId}
+                          className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 text-sm font-bold text-white shadow-xl hover:bg-blue-500 disabled:opacity-50"
+                        >
+                          {claimingBadge === badge.objectId ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <>
+                              <GraduationCap size={18} />
+                              Add to Profile
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    )} */}
+
+                  {/* {profile?.badges.includes(badge.objectId) && (
+                    <div className="absolute top-3 right-3 flex h-7 items-center gap-1 rounded-full bg-emerald-500/90 px-3 text-[10px] font-bold tracking-wider text-white uppercase shadow-lg backdrop-blur-md">
+                      <Check size={12} strokeWidth={3} /> Claimed
                     </div>
-                  )}
+                  )} */}
                 </div>
               ))}
           </div>
