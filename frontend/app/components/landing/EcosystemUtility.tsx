@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { User, Code, Search } from "lucide-react";
 
 export function EcosystemUtility() {
   return (
@@ -16,9 +17,7 @@ export function EcosystemUtility() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="space-y-8">
             <div className="mb-6 flex items-center gap-2">
-              <span className="material-symbols-outlined text-blue-500">
-                person
-              </span>
+              <User className="h-5 w-5 text-blue-500" size={18} />
               <h3 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
                 For Users
               </h3>
@@ -36,9 +35,7 @@ export function EcosystemUtility() {
 
           <div className="space-y-8">
             <div className="mb-6 flex items-center gap-2">
-              <span className="material-symbols-outlined text-blue-500">
-                code
-              </span>
+              <Code className="h-5 w-5 text-blue-500" size={18} />
               <h3 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
                 For Developers
               </h3>
@@ -57,9 +54,7 @@ export function EcosystemUtility() {
           {/* For Builders */}
           <div className="space-y-8">
             <div className="mb-6 flex items-center gap-2">
-              <span className="material-symbols-outlined text-blue-500">
-                search
-              </span>
+              <Search className="h-5 w-5 text-blue-500" size={18} />
               <h3 className="text-xs font-bold tracking-wider text-slate-400 uppercase">
                 For Builders
               </h3>

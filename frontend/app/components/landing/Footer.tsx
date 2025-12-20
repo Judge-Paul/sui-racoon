@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { Droplet } from "lucide-react";
 
 export function Footer() {
   return (
@@ -14,9 +15,7 @@ export function Footer() {
               The standard for decentralized academic achievements.
             </p>
             <div className="inline-flex items-center gap-2 rounded border border-slate-800 bg-slate-900 px-2 py-1">
-              <span className="material-symbols-outlined text-sm text-blue-500">
-                water_drop
-              </span>
+              <Droplet className="text-sm text-blue-500" size={16} />
               <span className="text-xs font-semibold text-slate-400">
                 Built on Sui
               </span>

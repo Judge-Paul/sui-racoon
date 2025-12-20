@@ -1,3 +1,5 @@
+import { Eye, CheckCircle } from "lucide-react";
+
 interface BadgeCardProps {
   title: string;
   image: string;
@@ -29,17 +31,13 @@ export function BadgeCard({
             className="flex h-11 w-11 transform items-center justify-center rounded-full bg-white text-slate-900 shadow-lg transition-all hover:scale-110 hover:bg-slate-900"
             title="View Details"
           >
-            <span className="material-symbols-outlined text-[22px]">
-              visibility
-            </span>
+            <Eye className="text-[22px]" size={20} />
           </button>
           <button
             className="flex h-11 w-11 transform items-center justify-center rounded-full bg-white text-slate-900 shadow-lg transition-all hover:scale-110 hover:bg-slate-900"
             title="Verify On-Chain"
           >
-            <span className="material-symbols-outlined text-[22px]">
-              verified
-            </span>
+            <CheckCircle className="text-[22px]" size={20} />
           </button>
         </div>
       </div>

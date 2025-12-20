@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { ConnectWalletButton } from "../ConnectWalletButton";
+import { Wallet } from "lucide-react";
 
 export function Navbar() {
   return (
@@ -39,9 +40,10 @@ export function Navbar() {
         </div>
         <ConnectWalletButton className="group hidden cursor-pointer items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-white/10 sm:flex">
           <span>Connect Wallet</span>
-          <span className="material-symbols-outlined text-sm text-slate-400 transition-colors group-hover:text-white">
-            account_balance_wallet
-          </span>
+          <Wallet
+            className="text-sm text-slate-400 transition-colors group-hover:text-white"
+            size={16}
+          />
         </ConnectWalletButton>
       </div>
     </nav>

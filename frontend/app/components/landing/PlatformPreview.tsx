@@ -1,3 +1,5 @@
+import { User, CheckCircle } from "lucide-react";
+
 export function PlatformPreview() {
   return (
     <section className="overflow-hidden bg-slate-950 py-24">
@@ -25,9 +27,7 @@ export function PlatformPreview() {
             </div>
             <div className="w-full md:w-1/2 md:pl-8">
               <div className="mb-6 inline-block rounded-xl border border-slate-800 bg-slate-900 p-3 shadow-sm">
-                <span className="material-symbols-outlined text-white">
-                  person
-                </span>
+                <User className="text-white" size={18} />
               </div>
               <h3 className="font-display mb-4 text-2xl font-bold text-white">
                 Student Profile
@@ -63,9 +63,7 @@ export function PlatformPreview() {
             </div>
             <div className="w-full md:w-1/2 md:pr-8">
               <div className="mb-6 inline-block rounded-xl border border-slate-800 bg-slate-900 p-3 shadow-sm">
-                <span className="material-symbols-outlined text-white">
-                  verified
-                </span>
+                <CheckCircle className="text-white" size={18} />
               </div>
               <h3 className="font-display mb-4 text-2xl font-bold text-white">
                 Badge Verification

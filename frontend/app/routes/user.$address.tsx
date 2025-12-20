@@ -23,6 +23,8 @@ import {
   ArrowLeft,
   QrCode,
   ExternalLink,
+  Award,
+  GraduationCap,
 } from "lucide-react";
 import { Transaction } from "@mysten/sui/transactions";
 import QRCode from "react-qr-code";
@@ -404,9 +406,7 @@ export default function UserProfile(props: Route.ComponentProps) {
 
         {badges.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
-            <span className="material-symbols-outlined mb-4 text-6xl text-slate-600">
-              military_tech
-            </span>
+            <Award size={48} className="mb-4 text-slate-600" />
             <h3 className="mb-2 text-xl font-semibold text-slate-400">
               No Badges Yet
             </h3>

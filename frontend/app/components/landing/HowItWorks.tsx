@@ -1,3 +1,5 @@
+import { Wallet, Award, Star, QrCode } from "lucide-react";
+
 export function HowItWorks() {
   return (
     <section className="bg-slate-950 py-24" id="verify">
@@ -13,22 +15,22 @@ export function HowItWorks() {
         <div className="relative grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="absolute top-12 left-0 -z-10 hidden h-px w-full bg-slate-800 md:block"></div>
           <StepCard
-            icon="wallet"
+            icon={<Wallet size={28} />}
             title="Connect Wallet"
             description="Link your Sui wallet. No email or password required."
           />
           <StepCard
-            icon="badge"
+            icon={<Award size={28} />}
             title="On-Chain Profile"
             description="Your profile is minted as a dynamic object on the blockchain."
           />
           <StepCard
-            icon="workspace_premium"
+            icon={<Star size={28} />}
             title="Receive Badges"
             description="Institutions issue verifiable badges directly to your address."
           />
           <StepCard
-            icon="qr_code_scanner"
+            icon={<QrCode size={28} />}
             title="Share & Verify"
             description="Employers verify your history instantly with a public link."
           />
@@ -44,7 +46,7 @@ function StepCard({
   description,
   onClick,
 }: {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
   onClick?: () => void;
@@ -52,9 +54,7 @@ function StepCard({
   return (
     <div className="group relative cursor-pointer" onClick={onClick}>
       <div className="relative z-10 mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-2xl border border-slate-800 bg-slate-900 shadow-sm transition-colors duration-300 ease-in-out group-hover:border-blue-500 group-hover:bg-blue-600">
-        <span className="material-symbols-outlined text-3xl text-slate-400 group-hover:text-white">
-          {icon}
-        </span>
+        {icon}
       </div>
       <div className="px-2 text-center">
         <h3 className="mb-2 font-bold text-white">{title}</h3>
