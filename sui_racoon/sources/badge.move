@@ -1,35 +1,27 @@
 module sui_racoon::badge {
-
+    use std::string::{String};
     use sui::clock::{Self, Clock};
-    use sui_racoon::organizer_pass;
 
     public struct Badge has key, store {
         id: UID,
-
-        title: vector<u8>,
-        description: vector<u8>,
-        category: vector<u8>,
-
+        title: String,
+        description: String,
+        category: String,
         issuer: address,
         issued_at: u64,
-
-        evidence_url: vector<u8>
+        evidence_url: String
     }
 
+    /// Internal helper to create a badge object
     public fun issue(
-        pass: &organizer_pass::OrganizerPass,
         clock: &Clock,
-
-        title: vector<u8>,
-        description: vector<u8>,
-        category: vector<u8>,
-        evidence_url: vector<u8>,
-
+        title: String,
+        description: String,
+        category: String,
+        evidence_url: String,
         ctx: &mut TxContext
     ): Badge {
         let sender = tx_context::sender(ctx);
-
-        organizer_pass::assert_valid(pass, sender);
 
         Badge {
             id: object::new(ctx),
@@ -42,44 +34,47 @@ module sui_racoon::badge {
         }
     }
 
-    /// Entry function to mint a badge and transfer it directly to a student
+    /// Single mint and transfer
     entry fun mint_and_transfer(
-        pass: &organizer_pass::OrganizerPass,
         clock: &Clock,
         recipient: address,
-        title: vector<u8>,
-        description: vector<u8>,
-        category: vector<u8>,
-        evidence_url: vector<u8>,
+        title: String,
+        description: String,
+        category: String,
+        evidence_url: String,
         ctx: &mut TxContext
     ) {
-        let badge = issue(pass, clock, title, description, category, evidence_url, ctx);
+        let badge = issue(clock, title, description, category, evidence_url, ctx);
         transfer::public_transfer(badge, recipient);
     }
 
-    // ============ Getter Functions ============
-
-    public fun get_title(badge: &Badge): vector<u8> {
-        badge.title
+    /// Batch minting: One metadata set sent to multiple recipients
+    entry fun mint_many_and_transfer(
+        clock: &Clock,
+        mut recipients: vector<address>,
+        title: String,
+        description: String,
+        category: String,
+        evidence_url: String,
+        ctx: &mut TxContext
+    ) {
+        while (!vector::is_empty(&recipients)) {
+            let recipient = vector::pop_back(&mut recipients);
+            // We use the fields to create new badges. 
+            // Note: In Move, we must pass by value, so we clone the strings for each loop.
+            let badge = issue(
+                clock, 
+                title, 
+                description, 
+                category, 
+                evidence_url, 
+                ctx
+            );
+            transfer::public_transfer(badge, recipient);
+        }
     }
 
-    public fun get_description(badge: &Badge): vector<u8> {
-        badge.description
-    }
-
-    public fun get_category(badge: &Badge): vector<u8> {
-        badge.category
-    }
-
-    public fun get_issuer(badge: &Badge): address {
-        badge.issuer
-    }
-
-    public fun get_issued_at(badge: &Badge): u64 {
-        badge.issued_at
-    }
-
-    public fun get_evidence_url(badge: &Badge): vector<u8> {
-        badge.evidence_url
-    }
+    // ============ Getters ============
+    public fun get_title(badge: &Badge): String { badge.title }
+    public fun get_description(badge: &Badge): String { badge.description }
 }

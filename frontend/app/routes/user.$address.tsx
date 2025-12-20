@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import type { Route } from "./+types/user.$address";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
@@ -14,7 +14,16 @@ import {
   STUDENT_PROFILE_STRUCT,
   STUDENT_PROFILE_CLAIM_BADGE_FN,
 } from "~/constants/sui";
-import { Loader2, Share2, Copy, Check } from "lucide-react";
+import {
+  Loader2,
+  Share2,
+  Copy,
+  Check,
+  UserX,
+  ArrowLeft,
+  QrCode,
+  ExternalLink,
+} from "lucide-react";
 import { Transaction } from "@mysten/sui/transactions";
 import QRCode from "react-qr-code";
 import {
@@ -61,6 +70,7 @@ export default function UserProfile(props: Route.ComponentProps) {
   const [badges, setBadges] = useState<BadgeData[]>([]);
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<boolean>(false); // Track if data exists
   const [claimingBadge, setClaimingBadge] = useState<string | null>(null);
   const [currentUrl, setCurrentUrl] = useState("");
 
@@ -82,12 +92,28 @@ export default function UserProfile(props: Route.ComponentProps) {
     const fetchUserData = async () => {
       if (!address) return;
       setLoading(true);
+      setError(false);
       try {
-        const ownedBadges = await suiClient.getOwnedObjects({
-          owner: address,
-          filter: { StructType: BADGE_STRUCT },
-          options: { showContent: true },
-        });
+        // Fetch Badges and Profiles in parallel
+        const [ownedBadges, ownedProfiles] = await Promise.all([
+          suiClient.getOwnedObjects({
+            owner: address,
+            filter: { StructType: BADGE_STRUCT },
+            options: { showContent: true },
+          }),
+          suiClient.getOwnedObjects({
+            owner: address,
+            filter: { StructType: STUDENT_PROFILE_STRUCT },
+            options: { showContent: true },
+          }),
+        ]);
+
+        // If no profile and no badges, show the "Not Found" page
+        if (ownedBadges.data.length === 0 && ownedProfiles.data.length === 0) {
+          setError(true);
+          setLoading(false);
+          return;
+        }
 
         const badgeDataList: BadgeData[] = [];
         for (const obj of ownedBadges.data) {
@@ -106,12 +132,6 @@ export default function UserProfile(props: Route.ComponentProps) {
         }
         setBadges(badgeDataList);
 
-        const ownedProfiles = await suiClient.getOwnedObjects({
-          owner: address,
-          filter: { StructType: STUDENT_PROFILE_STRUCT },
-          options: { showContent: true },
-        });
-
         if (ownedProfiles.data.length > 0) {
           const profileObj = ownedProfiles.data[0];
           if (profileObj.data?.content?.dataType === "moveObject") {
@@ -125,8 +145,9 @@ export default function UserProfile(props: Route.ComponentProps) {
             });
           }
         }
-      } catch (error) {
-        toast.error("Failed to load profile data");
+      } catch (err) {
+        console.error("Fetch error:", err);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -189,12 +210,49 @@ export default function UserProfile(props: Route.ComponentProps) {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-12 w-12 animate-spin text-blue-400" />
+      <div className="flex min-h-screen flex-col items-center justify-center bg-slate-950">
+        <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
+        <p className="mt-4 font-medium text-slate-400">Loading profile...</p>
       </div>
     );
   }
 
+  if (error) {
+    return (
+      <main className="mx-auto flex min-h-[80vh] w-full max-w-2xl flex-col items-center justify-center px-6 text-center">
+        <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-slate-900 ring-1 ring-white/10">
+          <UserX size={48} className="text-slate-500" />
+        </div>
+        <h1 className="font-display mb-3 text-3xl font-bold text-white">
+          Profile Not Found
+        </h1>
+        <p className="mb-8 text-slate-400">
+          We couldn't find any student profile or badges associated with this
+          address on the Sui network.
+        </p>
+        <div className="flex w-full flex-col gap-3 sm:flex-row sm:justify-center">
+          <Link
+            to="/"
+            className="flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-slate-950 transition-all hover:bg-slate-200"
+          >
+            <ArrowLeft size={18} />
+            Back to Home
+          </Link>
+          <a
+            href={`https://suiscan.xyz/testnet/account/${address}`}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-white transition-all hover:bg-white/10"
+          >
+            <ExternalLink size={18} />
+            View on Explorer
+          </a>
+        </div>
+      </main>
+    );
+  }
+
+  // 3. SUCCESS STATE (Profile/Badges exist)
   return (
     <main className="mx-auto flex w-full max-w-6xl grow flex-col items-center px-4 py-8 pt-32 md:px-0">
       <section className="glass-panel animate-fade-in-up group relative mb-10 w-full overflow-hidden rounded-3xl p-6 md:p-10">
@@ -247,7 +305,7 @@ export default function UserProfile(props: Route.ComponentProps) {
                   className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-400 shadow-sm transition-all hover:scale-110 hover:bg-white/10 hover:text-white active:scale-90"
                   title="Show QR Code"
                 >
-                  <span className="material-symbols-outlined">qr_code_2</span>
+                  <QrCode size={20} />
                 </button>
               </DialogTrigger>
               <DialogContent className="border-white/10 bg-slate-900 text-white sm:max-w-md">
@@ -294,21 +352,21 @@ export default function UserProfile(props: Route.ComponentProps) {
           {
             label: "Badges Earned",
             val: badges.length,
-            icon: "military_tech",
+            icon: <Check size={20} />,
             color: "text-blue-400",
             bg: "bg-blue-500/10",
           },
           {
             label: "Claimed to Profile",
             val: profile?.badges.length || 0,
-            icon: "verified",
+            icon: <Check size={20} />,
             color: "text-purple-400",
             bg: "bg-purple-500/10",
           },
           {
             label: "Unique Issuers",
             val: new Set(badges.map((b) => b.issuer)).size,
-            icon: "school",
+            icon: <Check size={20} />,
             color: "text-emerald-400",
             bg: "bg-emerald-500/10",
           },
@@ -322,9 +380,7 @@ export default function UserProfile(props: Route.ComponentProps) {
               <div
                 className={`flex size-10 items-center justify-center rounded-lg ${stat.bg} ${stat.color}`}
               >
-                <span className="material-symbols-outlined text-[20px]">
-                  {stat.icon}
-                </span>
+                {stat.icon}
               </div>
             </div>
             <p className="font-display text-4xl font-bold text-white">

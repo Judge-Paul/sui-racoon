@@ -1,6 +1,9 @@
 // import { ConnectWalletButton } from "../ConnectWalletButton";
+import { useNavigate } from "react-router";
 
 export function CTA() {
+  const navigate = useNavigate();
+
   return (
     <section className="relative overflow-hidden bg-slate-950 px-4 py-24 text-center">
       <div className="pointer-events-none absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-teal-500/10 blur-[100px]"></div>
@@ -17,7 +20,10 @@ export function CTA() {
           {/* <ConnectWalletButton className="cursor-pointer rounded-xl bg-white px-8 py-4 font-bold text-slate-900 shadow-lg shadow-white/5 transition-colors hover:bg-slate-100">
             Connect Wallet
           </ConnectWalletButton> */}
-          <button className="cursor-pointer rounded-xl border border-white/10 bg-white/5 px-8 py-4 font-medium text-white transition-colors hover:bg-white/10">
+          <button
+            onClick={() => navigate("/create-badge")}
+            className="cursor-pointer rounded-xl border border-white/10 bg-white/5 px-8 py-4 font-medium text-white transition-colors hover:bg-white/10"
+          >
             Issue Badges
           </button>
         </div>
