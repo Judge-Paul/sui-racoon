@@ -37,7 +37,7 @@ export const links: Route.LinksFunction = () => [
 
 const queryClient = new QueryClient();
 const networks = {
-  devnet: { url: getFullnodeUrl("devnet") },
+  testnet: { url: getFullnodeUrl("testnet") },
   mainnet: { url: getFullnodeUrl("mainnet") },
 };
 
@@ -53,7 +53,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <QueryClientProvider client={queryClient}>
-          <SuiClientProvider networks={networks} defaultNetwork="devnet">
+          <SuiClientProvider networks={networks} defaultNetwork="testnet">
             <WalletProvider>
               <div className="min-h-screen bg-slate-950 font-sans text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
                 <Navbar />

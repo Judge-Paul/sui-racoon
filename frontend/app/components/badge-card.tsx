@@ -26,7 +26,7 @@ export function BadgeCard({
   issuerAddress,
 }: BadgeCardProps) {
   const verifyOnChain = () => {
-    window.open(`https://suiscan.xyz/devnet/object/${objectId}`, "_blank");
+    window.open(`https://suiscan.xyz/testnet/object/${objectId}`, "_blank");
   };
 
   return (
